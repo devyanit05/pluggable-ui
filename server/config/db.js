@@ -1,15 +1,14 @@
-// config/db.js
-require('dotenv').config();
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const connectDB = async () => {
-  try {
-    await mongoose.connect(process.env.MONGODB_URI);
-    console.log('MongoDB connected...');
-  } catch (err) {
-    console.error('Failed to connect to MongoDB:', err);
-    process.exit(1);
-  }
-};
+// const DB = process.env.MONGODB_LOCAL;
+const DB = "mongodb://localhost:27017/pluggableui";
+
+const connectDB = () => {
+    mongoose.connect(DB).then(() => {
+        console.log("db connected")
+    }).catch((error) => { 
+      console.log(error.message) 
+    });
+}
 
 module.exports = connectDB;
